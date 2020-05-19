@@ -1,0 +1,39 @@
+{
+  "name": "@climax/ui-kit",
+  "version": "0.1.0",
+  "description": "ui-kit for climax",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": "Ante Machiedo",
+  "license": "MIT",
+  "private": true,
+  "peerDependencies": {
+    "@emotion/core": "^10.0.28",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "dependencies": {
+    "@emotion/styled": "^10.0.27",
+    "antd": "^4.2.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@storybook/react": "^5.3.18",
+    "babel-loader": "^8.1.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.9.2",
+    "webpack-cli": "^3.3.11"
+  },
+  "scripts": {
+    "prebuild": "tsc",
+    "build": "cross-env NODE_ENV=production webpack",
+    "start": "cross-env NODE_ENV=development webpack --watch",
+    "storybook": "start-storybook",
+    "test": "cross-env NODE_ENV=test jest --coverage --verbose --color"
+  }
+}
