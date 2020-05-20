@@ -12,7 +12,12 @@ function* fetchData({ payload }: PayloadAction<{}>) {
       app: { country, measurementType, period },
     }: RootState = yield select();
 
-    const response = yield getReport('mavg', measurementType, period, country);
+    const response = yield getReport(
+      'annualavg',
+      measurementType,
+      period,
+      country,
+    );
     const json: AnnualAvg[] = yield response.json();
 
     yield put(fetchDataSuccess(json));
