@@ -16,8 +16,10 @@ export interface ButtonGroupProps<T> {
 export default function <T>({ items, onChange, value }: ButtonGroupProps<T>) {
   return (
     <AntRadio.Group onChange={onChange} value={value}>
-      {items.map(({ label, value }) => (
-        <AntRadio.Button value={value}>{label}</AntRadio.Button>
+      {items.map(({ label, value }, index) => (
+        <AntRadio.Button key={index} value={value}>
+          {label}
+        </AntRadio.Button>
       ))}
     </AntRadio.Group>
   );
