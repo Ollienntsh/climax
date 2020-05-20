@@ -6,10 +6,12 @@ import { fetchData } from './state/reducer';
 import { RootState } from '../../redux/reducers';
 import { MonthlyAvg } from '../../types';
 import { MonthNames } from '../../constants';
+import { AppState } from '../App/state/reducer';
 
 export interface ClimateTableProps {
-  fetchData: typeof fetchData;
   data?: MonthlyAvg[];
+  fetchData: typeof fetchData;
+  filters: Partial<AppState>;
 }
 
 const columns = [
@@ -27,15 +29,20 @@ const columns = [
   })),
 ];
 
-const ClimateTable = ({ fetchData, data }: ClimateTableProps) => {
+const ClimateTable = ({ data, fetchData, filters }: ClimateTableProps) => {
   useEffect(() => {
     fetchData({});
-  }, [fetchData]);
+  }, [fetchData, filters]);
 
   return <Table dataSource={data} columns={columns} rowKey="gcm" />;
 };
 
 export default connect(
-  (state: RootState) => ({ data: state.climateTable.data }),
+  (state: RootState) => ({
+    data: state.climateTable.data,
+    filters: {
+      country: state.app.country,
+    },
+  }),
   { fetchData },
 )(ClimateTable);

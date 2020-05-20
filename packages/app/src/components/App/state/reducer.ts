@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Country, MeasurementType, Period } from '../../../types';
+import { Countries, Periods } from '../../../constants';
 
 export interface AppState {
   country: Country;
@@ -9,27 +10,38 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-  country: {
-    id: 1,
-    name: 'Croatia',
-    code: 'HRV',
-  },
+  country: Countries[0],
   measurementType: 'tas',
-  period: {
-    id: 4,
-    fromYear: 1980,
-    toYear: 1999,
-  },
+  period: Periods[3],
 };
 
 const ClimateSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    setFilters(
+      state: AppState,
+      {
+        payload: { country, measurementType, period },
+      }: PayloadAction<Partial<AppState>>,
+    ) {
+      if (country) {
+        state.country = country;
+      }
+
+      if (measurementType) {
+        state.measurementType = measurementType;
+      }
+
+      if (period) {
+        state.period = period;
+      }
+    },
+  },
 });
 
 const { actions, reducer } = ClimateSlice;
-const {} = actions;
+const { setFilters } = actions;
 
-export {};
+export { setFilters };
 export default reducer;

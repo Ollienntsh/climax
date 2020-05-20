@@ -1,31 +1,31 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { MonthlyAvg } from '../../../types';
+import { AnnualAvg } from '../../../types';
 
-export interface ClimateTableState {
-  data?: MonthlyAvg[];
+export interface ClimateBarChartState {
+  data?: AnnualAvg[];
   fetching?: boolean;
   error?: string;
 }
 
-const initialState: ClimateTableState = {};
+const initialState: ClimateBarChartState = {};
 
-const ClimateTableSlice = createSlice({
-  name: 'climateTable',
+const ClimateBarChartSlice = createSlice({
+  name: 'climateBarChart',
   initialState,
   reducers: {
-    fetchData(state: ClimateTableState, action: PayloadAction<{}>) {
+    fetchData(state: ClimateBarChartState, action: PayloadAction<{}>) {
       state.fetching = true;
     },
     fetchDataSuccess(
-      state: ClimateTableState,
-      { payload: data }: PayloadAction<MonthlyAvg[]>,
+      state: ClimateBarChartState,
+      { payload: data }: PayloadAction<AnnualAvg[]>,
     ) {
       state.fetching = false;
       state.data = data;
     },
     fetchDataFail(
-      state: ClimateTableState,
+      state: ClimateBarChartState,
       { payload: error }: PayloadAction<string>,
     ) {
       state.fetching = false;
@@ -34,7 +34,7 @@ const ClimateTableSlice = createSlice({
   },
 });
 
-const { actions, reducer } = ClimateTableSlice;
+const { actions, reducer } = ClimateBarChartSlice;
 const { fetchData, fetchDataFail, fetchDataSuccess } = actions;
 
 export { fetchData, fetchDataFail, fetchDataSuccess };
