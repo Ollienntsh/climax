@@ -11,7 +11,8 @@ import { AppState } from '../App/state/reducer';
 export interface ClimateTableProps {
   data?: MonthlyAvg[];
   fetchData: typeof fetchData;
-  filters: Partial<AppState>;
+  fetching?: boolean;
+  filters: AppState;
 }
 
 const columns = [
@@ -29,20 +30,31 @@ const columns = [
   })),
 ];
 
-const ClimateTable = ({ data, fetchData, filters }: ClimateTableProps) => {
+const ClimateTable = ({
+  data,
+  fetchData,
+  fetching,
+  filters,
+}: ClimateTableProps) => {
   useEffect(() => {
     fetchData({});
   }, [fetchData, filters]);
 
-  return <Table dataSource={data} columns={columns} rowKey="gcm" />;
+  return (
+    <Table
+      dataSource={data}
+      columns={columns}
+      rowKey="gcm"
+      loading={fetching}
+    />
+  );
 };
 
 export default connect(
   (state: RootState) => ({
     data: state.climateTable.data,
-    filters: {
-      country: state.app.country,
-    },
+    fetching: state.climateTable.fetching,
+    filters: state.app,
   }),
   { fetchData },
 )(ClimateTable);

@@ -22,7 +22,7 @@ const ClimateBarChart = ({
   }, [fetchData, filters]);
 
   return (
-    <div style={{ display: 'flex', height: 500 }}>
+    <div style={{ height: 500 }}>
       <BarChart data={data} />
     </div>
   );
