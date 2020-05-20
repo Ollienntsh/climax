@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@emotion/styled": "^10.0.27",
-    "antd": "^4.2.4"
+    "antd": "^4.2.4",
+    "@nivo/bar": "^0.61.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { BarChart } from '@climax/ui-kit';
 
 import { fetchData } from './state/reducer';
 import { RootState } from '../../redux/reducers';
-import { AnnualAvg } from '../../types';
 import { AppState } from '../App/state/reducer';
 
 export interface ClimateBarChartProps {
-  data?: AnnualAvg[];
+  data: { key: string; value: number }[];
   fetchData: typeof fetchData;
-  filters: Partial<AppState>;
+  filters: AppState;
 }
 
 const ClimateBarChart = ({
@@ -21,15 +21,13 @@ const ClimateBarChart = ({
     fetchData({});
   }, [fetchData, filters]);
 
-  return <div>{JSON.stringify(data)}</div>;
+  return <BarChart data={data} />;
 };
 
 export default connect(
   (state: RootState) => ({
-    data: state.climateBarChart.data,
-    filters: {
-      country: state.app.country,
-    },
+    data: state.climateBarChart.data || [],
+    filters: state.app,
   }),
   { fetchData },
 )(ClimateBarChart);

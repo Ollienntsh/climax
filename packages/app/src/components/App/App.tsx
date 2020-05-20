@@ -13,7 +13,7 @@ export interface AppProps {
 
 const App = ({ setFilters }: AppProps) => {
   return (
-    <div className="App">
+    <div style={{ height: 1000 }}>
       <div onClick={() => setFilters({ country: Countries[3] })}>Click me</div>
       <Switch>
         <Route path="/" exact component={ClimateTable} />

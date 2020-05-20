@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AnnualAvg } from '../../../types';
 
 export interface ClimateBarChartState {
-  data?: AnnualAvg[];
+  data?: { key: string; value: number }[];
   fetching?: boolean;
   error?: string;
 }
@@ -19,10 +19,13 @@ const ClimateBarChartSlice = createSlice({
     },
     fetchDataSuccess(
       state: ClimateBarChartState,
-      { payload: data }: PayloadAction<AnnualAvg[]>,
+      { payload }: PayloadAction<AnnualAvg[]>,
     ) {
       state.fetching = false;
-      state.data = data;
+      state.data = payload.map(({ gcm, annualData: [value] }) => ({
+        key: gcm,
+        value,
+      }));
     },
     fetchDataFail(
       state: ClimateBarChartState,
