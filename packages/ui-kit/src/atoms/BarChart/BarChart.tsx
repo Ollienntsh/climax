@@ -40,7 +40,7 @@ export default ({ data }: BarChartProps) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: 'country',
+      legend: 'key',
       legendPosition: 'middle',
       legendOffset: 32,
     }}
@@ -48,7 +48,7 @@ export default ({ data }: BarChartProps) => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: 'food',
+      legend: 'value',
       legendPosition: 'middle',
       legendOffset: -40,
     }}

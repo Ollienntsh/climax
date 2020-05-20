@@ -21,7 +21,11 @@ const ClimateBarChart = ({
     fetchData({});
   }, [fetchData, filters]);
 
-  return <BarChart data={data} />;
+  return (
+    <div style={{ display: 'flex', height: 500 }}>
+      <BarChart data={data} />
+    </div>
+  );
 };
 
 export default connect(
