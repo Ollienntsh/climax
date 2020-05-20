@@ -1,9 +1,17 @@
+export type ReportType = 'annualavg' | 'mavg';
+
 export type MeasurementType = 'tas' | 'pr';
 
 export interface Country {
   id: number;
   name: string;
   code: string | string[];
+}
+
+export interface Period {
+  id: number;
+  fromYear: number;
+  toYear: number;
 }
 
 interface BaseData {

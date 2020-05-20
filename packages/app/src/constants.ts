@@ -1,4 +1,4 @@
-import { Country } from './types';
+import { Country, Period } from './types';
 
 export const YugoslaviaCodes: string[] = [
   'HRV',
@@ -44,6 +44,29 @@ export const Countries: Country[] = [
     id: 7,
     name: 'Yugoslavia',
     code: YugoslaviaCodes,
+  },
+];
+
+export const Periods: Period[] = [
+  {
+    id: 1,
+    fromYear: 1920,
+    toYear: 1939,
+  },
+  {
+    id: 2,
+    fromYear: 1940,
+    toYear: 1959,
+  },
+  {
+    id: 3,
+    fromYear: 1960,
+    toYear: 1979,
+  },
+  {
+    id: 4,
+    fromYear: 1980,
+    toYear: 1999,
   },
 ];
 

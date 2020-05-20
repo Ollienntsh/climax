@@ -2,7 +2,7 @@ import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 
-import { default as appSagas } from './sagas';
+import { default as appSagas } from '../components/App/state/sagas';
 import rootReducer, { RootState } from './reducers';
 
 function* rootSaga() {

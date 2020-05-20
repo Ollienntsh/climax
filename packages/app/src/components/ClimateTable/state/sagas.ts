@@ -2,15 +2,13 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { all } from 'redux-saga/effects';
 import { put, takeLatest } from 'redux-saga/effects';
 
-import {
-  fetchDataSuccess,
-  fetchDataFail,
-} from '../components/App/state/reducer';
-import { MonthlyAvg } from '../types';
+import { fetchDataSuccess, fetchDataFail } from './reducer';
+import { getReport } from '../../../services';
+import { MonthlyAvg } from '../../../types';
 
 function* fetchData({ payload }: PayloadAction<{}>) {
   try {
-    const response = yield fetch(process.env.REACT_APP_ENDPOINT || '');
+    const response = yield getReport();
     const json: MonthlyAvg[] = yield response.json();
 
     yield put(fetchDataSuccess(json));
@@ -20,9 +18,9 @@ function* fetchData({ payload }: PayloadAction<{}>) {
 }
 
 function* watchForRequestData() {
-  yield takeLatest('climate/fetchData', fetchData);
+  yield takeLatest('climateTable/fetchData', fetchData);
 }
 
-export default function* appSaga() {
+export default function* climateTableSagas() {
   yield all([watchForRequestData()]);
 }

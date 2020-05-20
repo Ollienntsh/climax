@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { Table } from '@climax/ui-kit';
 import { connect } from 'react-redux';
 
-import { fetchData } from '../App/state/reducer';
+import { fetchData } from './state/reducer';
 import { RootState } from '../../redux/reducers';
 import { MonthlyAvg } from '../../types';
 import { MonthNames } from '../../constants';
 
 export interface ClimateTableProps {
   fetchData: typeof fetchData;
-  response?: MonthlyAvg[];
+  data?: MonthlyAvg[];
 }
 
 const columns = [
@@ -27,15 +27,15 @@ const columns = [
   })),
 ];
 
-const ClimateTable = ({ fetchData, response }: ClimateTableProps) => {
+const ClimateTable = ({ fetchData, data }: ClimateTableProps) => {
   useEffect(() => {
     fetchData({});
   }, [fetchData]);
 
-  return <Table dataSource={response} columns={columns} rowKey="gcm" />;
+  return <Table dataSource={data} columns={columns} rowKey="gcm" />;
 };
 
 export default connect(
-  (state: RootState) => ({ response: state.app.climate.response }),
+  (state: RootState) => ({ data: state.app.climateTable.data }),
   { fetchData },
 )(ClimateTable);
