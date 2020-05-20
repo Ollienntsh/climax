@@ -1,14 +1,18 @@
 import { PayloadAction } from '@reduxjs/toolkit';
-import { all } from 'redux-saga/effects';
-import { put, takeLatest } from 'redux-saga/effects';
+import { all, put, select, takeLatest } from 'redux-saga/effects';
 
 import { fetchDataSuccess, fetchDataFail } from './reducer';
 import { getReport } from '../../../services';
 import { MonthlyAvg } from '../../../types';
+import { RootState } from '../../../redux/reducers';
 
 function* fetchData({ payload }: PayloadAction<{}>) {
   try {
-    const response = yield getReport();
+    const {
+      app: { country, measurementType, period },
+    }: RootState = yield select();
+
+    const response = yield getReport('mavg', measurementType, period, country);
     const json: MonthlyAvg[] = yield response.json();
 
     yield put(fetchDataSuccess(json));

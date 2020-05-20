@@ -1,20 +1,35 @@
-import { combineReducers } from 'redux';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Country, MeasurementType, Period } from '../../../types';
-import {
-  default as climateTableReducer,
-  ClimateTableState,
-} from '../../ClimateTable/state/reducer';
 
 export interface AppState {
-  climateTable: ClimateTableState;
-  filter?: {
-    country: Country;
-    measurementType: MeasurementType;
-    period: Period;
-  };
+  country: Country;
+  measurementType: MeasurementType;
+  period: Period;
 }
 
-export default combineReducers({
-  climateTable: climateTableReducer,
+const initialState: AppState = {
+  country: {
+    id: 1,
+    name: 'Croatia',
+    code: 'HRV',
+  },
+  measurementType: 'tas',
+  period: {
+    id: 4,
+    fromYear: 1980,
+    toYear: 1999,
+  },
+};
+
+const ClimateSlice = createSlice({
+  name: 'app',
+  initialState,
+  reducers: {},
 });
+
+const { actions, reducer } = ClimateSlice;
+const {} = actions;
+
+export {};
+export default reducer;

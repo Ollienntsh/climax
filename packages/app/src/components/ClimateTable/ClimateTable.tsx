@@ -36,6 +36,6 @@ const ClimateTable = ({ fetchData, data }: ClimateTableProps) => {
 };
 
 export default connect(
-  (state: RootState) => ({ data: state.app.climateTable.data }),
+  (state: RootState) => ({ data: state.climateTable.data }),
   { fetchData },
 )(ClimateTable);
