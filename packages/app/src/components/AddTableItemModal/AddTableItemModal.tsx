@@ -52,6 +52,7 @@ export default ({ onSubmit, ...modalProps }: AddTableItemModal) => {
         </Flex>
         <Button
           onClick={() => onSubmit(gcm, monthVals)}
+          disabled={!gcm}
           type="primary"
           size="large"
         >

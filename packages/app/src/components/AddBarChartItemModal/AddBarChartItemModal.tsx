@@ -36,6 +36,7 @@ export default ({ onSubmit, ...modalProps }: AddBarChartItemModalProps) => {
         </Flex>
         <Button
           onClick={() => onSubmit(gcm, value)}
+          disabled={!gcm}
           type="primary"
           size="large"
         >
