@@ -3,6 +3,7 @@ import {
   AlignItemsProperty,
   BackgroundColorProperty,
   FlexDirectionProperty,
+  JustifyContentProperty,
   MarginProperty,
   PaddingProperty,
   BoxShadowProperty,
@@ -16,6 +17,7 @@ export interface FlexProps {
   direction?: FlexDirectionProperty;
   gutter?: number;
   height?: HeightProperty<number>;
+  justifyContent?: JustifyContentProperty;
   margin?: MarginProperty<number>;
   padding?: PaddingProperty<number>;
   shadow?: BoxShadowProperty;
@@ -51,6 +53,7 @@ export default styled.div<FlexProps>(
     background,
     direction,
     height,
+    justifyContent,
     margin,
     padding,
     shadow,
@@ -58,6 +61,7 @@ export default styled.div<FlexProps>(
   }) => ({
     background,
     height,
+    justifyContent,
     margin,
     padding,
     width,

@@ -29,3 +29,19 @@ yarn start:app
 ```
 yarn build
 ```
+
+## Storybook
+
+> Navigate to **ui-kit** module and run:
+
+```
+yarn storybook
+```
+
+## Tests
+
+> Either via root project folder or in a corresponding module, run:
+
+```
+yarn test
+```

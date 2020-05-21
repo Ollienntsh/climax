@@ -8,14 +8,25 @@ export interface ButtonGroupItem<T> {
 }
 
 export interface ButtonGroupProps<T> {
+  defaultValue?: T;
   items: ButtonGroupItem<T>[];
   onChange?(e: RadioChangeEvent): void;
-  value: T;
+  value?: T;
 }
 
-export default function <T>({ items, onChange, value }: ButtonGroupProps<T>) {
+export default function <T>({
+  defaultValue,
+  items,
+  onChange,
+  value,
+}: ButtonGroupProps<T>) {
   return (
-    <AntRadio.Group onChange={onChange} value={value} buttonStyle="solid">
+    <AntRadio.Group
+      defaultValue={defaultValue}
+      onChange={onChange}
+      value={value}
+      buttonStyle="solid"
+    >
       {items.map(({ label, value }, index) => (
         <AntRadio.Button key={index} value={value}>
           {label}
