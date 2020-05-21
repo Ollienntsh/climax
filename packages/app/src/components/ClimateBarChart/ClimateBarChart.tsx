@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { BarChart } from '@climax/ui-kit';
+import { BarChart, Flex } from '@climax/ui-kit';
 
 import { fetchData } from './state/reducer';
 import { RootState } from '../../redux/reducers';
@@ -22,9 +22,9 @@ export const ClimateBarChart = ({
   }, [fetchData, filters]);
 
   return (
-    <div style={{ height: 500 }}>
+    <Flex alignItems="center" height={600} padding={20}>
       <BarChart data={data} />
-    </div>
+    </Flex>
   );
 };
 

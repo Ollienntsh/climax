@@ -1,5 +1,12 @@
 import React, { useCallback, useState } from 'react';
-import { Button, Input, InputNumber, Modal, ModalProps } from '@climax/ui-kit';
+import {
+  Button,
+  Flex,
+  Input,
+  InputNumber,
+  Modal,
+  ModalProps,
+} from '@climax/ui-kit';
 
 import { MonthNames } from '../../constants';
 
@@ -23,28 +30,26 @@ export default ({ onSubmit, ...modalProps }: AddTableItemModal) => {
 
   return (
     <Modal {...modalProps} footer={null}>
-      <div style={{ padding: 10 }}>
-        GCM:{' '}
-        <Input
-          placeholder="gcm"
-          value={gcm}
-          onChange={({ target: { value } }) => setGcm(value)}
-        />
-      </div>
-      <div style={{ padding: 10 }}>
-        {MonthNames.map((monthName, index) => (
-          <div key={monthName}>
-            <div style={{ display: 'inline-block', width: 100 }}>
-              {monthName}:{' '}
-            </div>
-            <InputNumber
-              value={monthVals[index]}
-              onChange={newValue => updateMonthValue(Number(newValue), index)}
-            />
-          </div>
-        ))}
-      </div>
-      <div style={{ padding: 10 }}>
+      <Flex direction="column" gutter={4} padding={20}>
+        <Flex alignItems="center" gutter={4}>
+          <span>GCM:</span>
+          <Input
+            placeholder="gcm"
+            value={gcm}
+            onChange={({ target: { value } }) => setGcm(value)}
+          />
+        </Flex>
+        <Flex direction="column" gutter={2}>
+          {MonthNames.map((monthName, index) => (
+            <Flex key={monthName} gutter={4}>
+              <Flex width={100}>{monthName}: </Flex>
+              <InputNumber
+                value={monthVals[index]}
+                onChange={newValue => updateMonthValue(Number(newValue), index)}
+              />
+            </Flex>
+          ))}
+        </Flex>
         <Button
           onClick={() => onSubmit(gcm, monthVals)}
           type="primary"
@@ -52,7 +57,7 @@ export default ({ onSubmit, ...modalProps }: AddTableItemModal) => {
         >
           Submit
         </Button>
-      </div>
+      </Flex>
     </Modal>
   );
 };
