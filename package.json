@@ -23,6 +23,8 @@
   "private": true,
   "scripts": {
     "build": "lerna exec --scope @climax/* \"yarn build\"",
-    "start": "lerna run start --stream"
+    "build:dev": "lerna exec --scope @climax/ui-kit \"yarn build\"",
+    "start": "lerna run start --stream",
+    "start:app": "lerna exec --scope @climax/app \"yarn start\""
   }
 }
