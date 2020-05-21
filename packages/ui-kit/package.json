@@ -36,5 +36,16 @@
     "start": "cross-env NODE_ENV=production webpack --watch",
     "storybook": "start-storybook",
     "test": "cross-env NODE_ENV=test jest --coverage --verbose --color"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": ".*\\.test\\.(ts|tsx|js)$"
   }
 }
