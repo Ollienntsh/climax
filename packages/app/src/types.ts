@@ -14,7 +14,7 @@ export interface Period {
   toYear: number;
 }
 
-interface BaseData {
+export interface BaseData {
   gcm: string;
   variable: MeasurementType;
   fromYear: number;
