@@ -1,7 +1,7 @@
 import { all, put, select, takeLatest } from 'redux-saga/effects';
 
 import { fetchDataSuccess, fetchDataFail } from './reducer';
-import { getReport } from '../../../services';
+import { getReport, showError } from '../../../services';
 import { AnnualAvg } from '../../../types';
 import { RootState } from '../../../redux/reducers';
 
@@ -21,6 +21,7 @@ function* fetchData() {
     yield put(fetchDataSuccess(data));
   } catch (error) {
     yield put(fetchDataFail(error.message));
+    showError(error.message);
   }
 }
 
