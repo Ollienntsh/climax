@@ -14,6 +14,12 @@ const ClimateTableSlice = createSlice({
   name: 'climateTable',
   initialState,
   reducers: {
+    addItem(
+      state: ClimateTableState,
+      { payload: dataItem }: PayloadAction<MonthlyAvg>,
+    ) {
+      state.data = [...(state.data || []), dataItem];
+    },
     fetchData(state: ClimateTableState, action: PayloadAction<{}>) {
       state.fetching = true;
     },
@@ -35,7 +41,7 @@ const ClimateTableSlice = createSlice({
 });
 
 const { actions, reducer } = ClimateTableSlice;
-const { fetchData, fetchDataFail, fetchDataSuccess } = actions;
+const { addItem, fetchData, fetchDataFail, fetchDataSuccess } = actions;
 
-export { fetchData, fetchDataFail, fetchDataSuccess };
+export { addItem, fetchData, fetchDataFail, fetchDataSuccess };
 export default reducer;

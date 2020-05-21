@@ -30,7 +30,7 @@ const columns = [
   })),
 ];
 
-const ClimateTable = ({
+export const ClimateTable = ({
   data,
   fetchData,
   fetching,

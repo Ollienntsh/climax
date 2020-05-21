@@ -63,6 +63,8 @@ export const getReport = async (
     );
     const flattenedData = data.flat();
 
+    if (flattenedData.length === 0) return [];
+
     if (isAnnualAvgArray(flattenedData, reportType)) {
       const aggregatedData = flattenedData.reduce(
         (

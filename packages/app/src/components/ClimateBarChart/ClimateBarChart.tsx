@@ -12,7 +12,7 @@ export interface ClimateBarChartProps {
   filters: AppState;
 }
 
-const ClimateBarChart = ({
+export const ClimateBarChart = ({
   data,
   fetchData,
   filters,

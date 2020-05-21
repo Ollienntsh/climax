@@ -2,8 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AnnualAvg } from '../../../types';
 
+interface DataItem {
+  key: string;
+  value: number;
+}
+
 export interface ClimateBarChartState {
-  data?: { key: string; value: number }[];
+  data?: DataItem[];
   fetching?: boolean;
   error?: string;
 }
@@ -14,7 +19,13 @@ const ClimateBarChartSlice = createSlice({
   name: 'climateBarChart',
   initialState,
   reducers: {
-    fetchData(state: ClimateBarChartState, action: PayloadAction<{}>) {
+    addItem(
+      state: ClimateBarChartState,
+      { payload: dataItem }: PayloadAction<DataItem>,
+    ) {
+      state.data = [...(state.data || []), dataItem];
+    },
+    fetchData(state: ClimateBarChartState, _: PayloadAction<{}>) {
       state.fetching = true;
     },
     fetchDataSuccess(
@@ -38,7 +49,7 @@ const ClimateBarChartSlice = createSlice({
 });
 
 const { actions, reducer } = ClimateBarChartSlice;
-const { fetchData, fetchDataFail, fetchDataSuccess } = actions;
+const { addItem, fetchData, fetchDataFail, fetchDataSuccess } = actions;
 
-export { fetchData, fetchDataFail, fetchDataSuccess };
+export { addItem, fetchData, fetchDataFail, fetchDataSuccess };
 export default reducer;

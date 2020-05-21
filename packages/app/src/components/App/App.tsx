@@ -1,16 +1,22 @@
 import React, { useCallback, useState } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { ButtonGroup, Select, Toggle } from '@climax/ui-kit';
+import { Button, ButtonGroup, Select, Toggle } from '@climax/ui-kit';
 
+import AddBarChartItemModal from '../AddBarChartItemModal';
+import AddTableItemModal from '../AddTableItemModal';
 import ClimateTable from '../ClimateTable';
+import { addItem as addTableItem } from '../ClimateTable/state/reducer';
 import ClimateBarChart from '../ClimateBarChart';
+import { addItem as addBarChartItem } from '../ClimateBarChart/state/reducer';
 import { setFilters } from './state/reducer';
 import { Countries, Periods } from '../../constants';
 import { RootState } from '../../redux/reducers';
 import { Country, MeasurementType, Period } from '../../types';
 
 export interface AppProps {
+  addBarChartItem: typeof addBarChartItem;
+  addTableItem: typeof addTableItem;
   country: Country;
   measurementType: MeasurementType;
   period: Period;
@@ -27,22 +33,73 @@ const periodOptions = Periods.map(({ id, fromYear, toYear }) => ({
   label: `${fromYear} - ${toYear}`,
 }));
 
-const App = ({ country, measurementType, period, setFilters }: AppProps) => {
+const App = ({
+  addBarChartItem,
+  addTableItem,
+  country,
+  measurementType,
+  period,
+  setFilters,
+}: AppProps) => {
   const history = useHistory();
-  const [toggleActive, setToggleActive] = useState(
+  const [
+    addBarChartItemModalVisible,
+    setAddBarChartItemModalVisible,
+  ] = useState(false);
+  const [addTableItemModalVisible, setAddTableItemModalVisible] = useState(
+    false,
+  );
+  const [barChartActive, setBarChartActive] = useState(
     history.location.pathname.includes('/bar'),
+  );
+
+  const handleAddBarChartItem = useCallback(
+    (gcm: string, value: number) => {
+      addBarChartItem({
+        value,
+        key: gcm,
+      });
+      setAddBarChartItemModalVisible(false);
+    },
+    [addBarChartItem],
+  );
+
+  const handleAddTableItem = useCallback(
+    (gcm: string, monthVals: number[]) => {
+      addTableItem({
+        fromYear: Number.NaN,
+        toYear: Number.NaN,
+        gcm,
+        monthVals,
+        variable: measurementType,
+      });
+      setAddTableItemModalVisible(false);
+    },
+    [addTableItem, measurementType],
   );
 
   const handleToggleChange = useCallback(
     (active: boolean) => {
       history.push(active ? '/bar' : '/');
-      setToggleActive(active);
+      setBarChartActive(active);
     },
     [history],
   );
 
   return (
-    <div>
+    <>
+      <AddBarChartItemModal
+        destroyOnClose
+        visible={addBarChartItemModalVisible}
+        onSubmit={handleAddBarChartItem}
+        onCancel={() => setAddBarChartItemModalVisible(false)}
+      />
+      <AddTableItemModal
+        destroyOnClose
+        visible={addTableItemModalVisible}
+        onSubmit={handleAddTableItem}
+        onCancel={() => setAddTableItemModalVisible(false)}
+      />
       <div
         style={{
           background: 'rgba(255,255,255, 0.1)',
@@ -56,7 +113,6 @@ const App = ({ country, measurementType, period, setFilters }: AppProps) => {
       >
         <Select
           options={countryOptions}
-          style={{ minWidth: 300 }}
           value={country.id}
           onSelect={value =>
             setFilters({ country: Countries.find(({ id }) => id === value) })
@@ -64,7 +120,6 @@ const App = ({ country, measurementType, period, setFilters }: AppProps) => {
         />
         <Select
           options={periodOptions}
-          style={{ minWidth: 300 }}
           value={period.id}
           onSelect={value =>
             setFilters({ period: Periods.find(({ id }) => id === value) })
@@ -80,9 +135,19 @@ const App = ({ country, measurementType, period, setFilters }: AppProps) => {
             setFilters({ measurementType: value })
           }
         />
+        <Button
+          type="primary"
+          onClick={() =>
+            barChartActive
+              ? setAddBarChartItemModalVisible(true)
+              : setAddTableItemModalVisible(true)
+          }
+        >
+          Add item
+        </Button>
         <div style={{ display: 'flex' }}>
           Bar Chart active:
-          <Toggle checked={toggleActive} onChange={handleToggleChange} />
+          <Toggle checked={barChartActive} onChange={handleToggleChange} />
         </div>
       </div>
       <Switch>
@@ -90,7 +155,7 @@ const App = ({ country, measurementType, period, setFilters }: AppProps) => {
         <Route path="/table" component={ClimateTable} />
         <Route path="/bar" component={ClimateBarChart} />
       </Switch>
-    </div>
+    </>
   );
 };
 
@@ -100,5 +165,5 @@ export default connect(
     measurementType: state.app.measurementType,
     period: state.app.period,
   }),
-  { setFilters },
+  { addBarChartItem, addTableItem, setFilters },
 )(App);
