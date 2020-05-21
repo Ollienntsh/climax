@@ -43,6 +43,9 @@
       "tsx",
       "js"
     ],
+    "setupFilesAfterEnv": [
+      "./setupTests.ts"
+    ],
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
     },

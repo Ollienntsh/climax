@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonGroup should render default 1`] = `
+<div
+  className="ant-radio-group ant-radio-group-solid"
+/>
+`;
+
+exports[`ButtonGroup should render with items 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+  <div
+    className=\\"ant-radio-group ant-radio-group-solid\\"
+- >
+-   <label
+-     className=\\"ant-radio-button-wrapper\\"
+-   >
+-     <span
+-       className=\\"ant-radio-button\\"
+-       style={Object {}}
+-     >
+-       <input
+-         checked={false}
+-         className=\\"ant-radio-button-input\\"
+-         onBlur={[Function onBlur]}
+-         onChange={[Function anonymous]}
+-         onFocus={[Function onFocus]}
+-         type=\\"radio\\"
+-         value={1}
+  />
+-       <span
+-         className=\\"ant-radio-button-inner\\"
+-       />
+-     </span>
+-     <span>
+-       First
+-     </span>
+-   </label>
+-   <label
+-     className=\\"ant-radio-button-wrapper\\"
+-   >
+-     <span
+-       className=\\"ant-radio-button\\"
+-       style={Object {}}
+-     >
+-       <input
+-         checked={false}
+-         className=\\"ant-radio-button-input\\"
+-         onBlur={[Function onBlur]}
+-         onChange={[Function anonymous]}
+-         onFocus={[Function onFocus]}
+-         type=\\"radio\\"
+-         value={2}
+-       />
+-       <span
+-         className=\\"ant-radio-button-inner\\"
+-       />
+-     </span>
+-     <span>
+-       Second
+-     </span>
+-   </label>
+- </div>"
+`;
+
+exports[`ButtonGroup should render with second item preselected 1`] = `
+"Snapshot Diff:
+- First value
++ Second value
+
+  <div
+    className=\\"ant-radio-group ant-radio-group-solid\\"
+- >
+-   <label
+-     className=\\"ant-radio-button-wrapper\\"
+-   >
+-     <span
+-       className=\\"ant-radio-button\\"
+-       style={Object {}}
+-     >
+-       <input
+-         checked={false}
+-         className=\\"ant-radio-button-input\\"
+-         onBlur={[Function onBlur]}
+-         onChange={[Function anonymous]}
+-         onFocus={[Function onFocus]}
+-         type=\\"radio\\"
+-         value={1}
+  />
+-       <span
+-         className=\\"ant-radio-button-inner\\"
+-       />
+-     </span>
+-     <span>
+-       First
+-     </span>
+-   </label>
+-   <label
+-     className=\\"ant-radio-button-wrapper ant-radio-button-wrapper-checked\\"
+-   >
+-     <span
+-       className=\\"ant-radio-button ant-radio-button-checked\\"
+-       style={Object {}}
+-     >
+-       <input
+-         checked={true}
+-         className=\\"ant-radio-button-input\\"
+-         onBlur={[Function onBlur]}
+-         onChange={[Function anonymous]}
+-         onFocus={[Function onFocus]}
+-         type=\\"radio\\"
+-         value={2}
+-       />
+-       <span
+-         className=\\"ant-radio-button-inner\\"
+-       />
+-     </span>
+-     <span>
+-       Second
+-     </span>
+-   </label>
+- </div>"
+`;
