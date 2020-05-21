@@ -30,35 +30,34 @@ export default ({ onSubmit, ...modalProps }: AddTableItemModal) => {
 
   return (
     <Modal {...modalProps} footer={null}>
-      <Flex direction="column" gutter={4} padding={20}>
-        <Flex alignItems="center" gutter={4}>
-          <span>GCM:</span>
-          <Input
-            placeholder="gcm"
-            value={gcm}
-            onChange={({ target: { value } }) => setGcm(value)}
-          />
+      <form onSubmit={() => onSubmit(gcm, monthVals)}>
+        <Flex direction="column" gutter={4} padding={20}>
+          <Flex alignItems="center" gutter={4}>
+            <span>GCM:</span>
+            <Input
+              placeholder="gcm"
+              value={gcm}
+              onChange={({ target: { value } }) => setGcm(value)}
+            />
+          </Flex>
+          <Flex direction="column" gutter={2}>
+            {MonthNames.map((monthName, index) => (
+              <Flex key={monthName} gutter={4}>
+                <Flex width={100}>{monthName}: </Flex>
+                <InputNumber
+                  value={monthVals[index]}
+                  onChange={newValue =>
+                    updateMonthValue(Number(newValue), index)
+                  }
+                />
+              </Flex>
+            ))}
+          </Flex>
+          <Button disabled={!gcm} type="primary" size="large" htmlType="submit">
+            Submit
+          </Button>
         </Flex>
-        <Flex direction="column" gutter={2}>
-          {MonthNames.map((monthName, index) => (
-            <Flex key={monthName} gutter={4}>
-              <Flex width={100}>{monthName}: </Flex>
-              <InputNumber
-                value={monthVals[index]}
-                onChange={newValue => updateMonthValue(Number(newValue), index)}
-              />
-            </Flex>
-          ))}
-        </Flex>
-        <Button
-          onClick={() => onSubmit(gcm, monthVals)}
-          disabled={!gcm}
-          type="primary"
-          size="large"
-        >
-          Submit
-        </Button>
-      </Flex>
+      </form>
     </Modal>
   );
 };

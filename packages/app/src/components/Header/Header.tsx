@@ -96,18 +96,22 @@ const Header = ({
 
   return (
     <>
-      <AddBarChartItemModal
-        destroyOnClose
-        visible={addBarChartItemModalVisible}
-        onSubmit={handleAddBarChartItem}
-        onCancel={() => setAddBarChartItemModalVisible(false)}
-      />
-      <AddTableItemModal
-        destroyOnClose
-        visible={addTableItemModalVisible}
-        onSubmit={handleAddTableItem}
-        onCancel={() => setAddTableItemModalVisible(false)}
-      />
+      {addBarChartItemModalVisible && (
+        <AddBarChartItemModal
+          destroyOnClose
+          visible={addBarChartItemModalVisible}
+          onSubmit={handleAddBarChartItem}
+          onCancel={() => setAddBarChartItemModalVisible(false)}
+        />
+      )}
+      {addTableItemModalVisible && (
+        <AddTableItemModal
+          destroyOnClose
+          visible={addTableItemModalVisible}
+          onSubmit={handleAddTableItem}
+          onCancel={() => setAddTableItemModalVisible(false)}
+        />
+      )}
       <Flex
         alignItems="center"
         background="rgba(255,255,255, 0.15)"

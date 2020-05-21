@@ -18,31 +18,28 @@ export default ({ onSubmit, ...modalProps }: AddBarChartItemModalProps) => {
 
   return (
     <Modal {...modalProps} footer={null}>
-      <Flex direction="column" gutter={4} padding={20}>
-        <Flex alignItems="center" gutter={4}>
-          <span>GCM:</span>
-          <Input
-            placeholder="gcm"
-            value={gcm}
-            onChange={({ target: { value } }) => setGcm(value)}
-          />
+      <form onSubmit={() => onSubmit(gcm, value)}>
+        <Flex direction="column" gutter={4} padding={20}>
+          <Flex alignItems="center" gutter={4}>
+            <span>GCM:</span>
+            <Input
+              placeholder="gcm"
+              value={gcm}
+              onChange={({ target: { value } }) => setGcm(value)}
+            />
+          </Flex>
+          <Flex alignItems="center" gutter={4}>
+            <span>Value:</span>
+            <InputNumber
+              value={value}
+              onChange={newValue => setValue(Number(newValue))}
+            />
+          </Flex>
+          <Button disabled={!gcm} type="primary" size="large" htmlType="submit">
+            Submit
+          </Button>
         </Flex>
-        <Flex alignItems="center" gutter={4}>
-          <span>Value:</span>
-          <InputNumber
-            value={value}
-            onChange={newValue => setValue(Number(newValue))}
-          />
-        </Flex>
-        <Button
-          onClick={() => onSubmit(gcm, value)}
-          disabled={!gcm}
-          type="primary"
-          size="large"
-        >
-          Submit
-        </Button>
-      </Flex>
+      </form>
     </Modal>
   );
 };
